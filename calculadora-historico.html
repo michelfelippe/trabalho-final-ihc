@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Calculadora com Histórico</title>
+</head>
+
+<body>
+
+    <div class="container" id="app">
+
+        <div class="text-center font-weight-bold">
+            <h1>CALCULADORA OPERAÇÃO</h1>
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label for="num1">PRIMEIRO:</label>
+                <input class="form-control" type="text" id="num1" name="num1" v-model.number="num1"
+                    placeholder="ex: 10">
+            </div>
+
+            <select v-model="operacao" id="operacao">
+                <option value="" disabled>SELECIONE</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+
+            <div class="form-group">
+                <label for="num2">SEGUNDO:</label>
+                <input class="form-control" type="text" id="num2" name="num2" v-model.number="num2"
+                    placeholder="ex: 10">
+            </div>
+            <!-- v-on:click pode ser substituido por @click -->
+            <button class="btn btn-dark btn-lg" v-on:click.prevent="calcular()">CALCULAR</button>
+
+            <div class="form-group">
+                <label for="resultado">RESULTADO:</label>
+                <input class="form-control" type="text" id="resultado" name="resultado" v-model="resultado" readonly>
+            </div>
+
+            <div>
+                <h1>HISTÓRICO...</h1>
+                <ul>
+                    <li v-for="item in historico">{{item}}</li>
+                </ul>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num1: null,
+                num2: null,
+                operacao: '',
+                resultado: null,
+                historico: [],
+            },
+            methods: {
+                calcular: function () {
+                    switch (this.operacao) {
+                        case '+': this.resultado = this.num1 + this.num2;
+                        var conta = this.num1 + ' + ' + this.num2 + '=' + this.resultado;
+                        this.historico.push(conta);
+                            break;
+                        case '-': this.resultado = this.num1 - this.num2;
+                        var conta = this.num1 + ' - ' + this.num2 + '=' + this.resultado;
+                        this.historico.push(conta);
+                            break;
+                        case '*': this.resultado = this.num1 * this.num2;
+                        var conta = this.num1 + ' * ' + this.num2 + '=' + this.resultado;
+                        this.historico.push(conta);
+                            break;
+                        case '/': this.resultado = this.num1 / this.num2;
+                        var conta = this.num1 + ' / ' + this.num2 + '=' + this.resultado;
+                        this.historico.push(conta);
+                            break;
+                        default: break;
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

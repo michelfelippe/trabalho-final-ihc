@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Calculadora Somar</title>
+</head>
+<body>
+    
+    <div class="container" id="app">
+        <form>
+            <div class="form-group">
+                <label for="num1">Primeiro:</label>
+                <input type="text" id="num1" name="num1" v-model="num1">
+            </div>
+
+            <div class="form-group">
+                <label for="num2">Segundo:</label>
+                <input type="text" id="num2" name="num2" v-model="num2">
+            </div>
+            <!-- v-on:click pode ser substituido por @click -->
+            <button class="btn btn-primary" v-on:click.prevent="somar()">SOMAR</button>
+
+            <div class="form-group">
+                <label for="resultado">Resultado:</label>
+                <input type="text" id="resultado" name="resultado" v-model="resultado">
+            </div>
+          
+        </form>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num1: null,
+                num2: null,
+                resultado: null,
+            },
+            methods: {
+                somar: function() {
+                    this.resultado = +this.num1 + +this.num2;
+                }
+            }
+        });
+    </script>
+
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
